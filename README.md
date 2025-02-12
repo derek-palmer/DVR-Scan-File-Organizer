@@ -15,7 +15,7 @@ This project:
 ### Setup and Build
 Clone the repository:
 ```sh
-git clone https://github.com/YOUR_USERNAME/DVR-Scan-Organizer.git
+git clone https://github.com/derek-palmer/DVR-Scan-Organizer.git
 cd DVR-Scan-Organizer
 ```
 
