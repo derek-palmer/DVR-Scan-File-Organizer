@@ -1,12 +1,5 @@
 # DVR-Scan-Organizer
-
-## Overview
 DVR-Scan-Organizer is a Dockerized extension for DVR-Scan, designed to process multiple video files and organize output in a structured format.
-
-This project:
-- Supports batch video processing.
-- Uses Docker for an isolated, reproducible environment.
-- Includes automated linting and testing.
 
 ## Getting Started
 ### Prerequisites
