@@ -24,8 +24,10 @@ def scan_videos(input_dir, output_dir):
 def main():
     """ Main function for command-line execution. """
     parser = argparse.ArgumentParser(description="Batch process videos with DVR-Scan")
-    parser.add_argument("--input", required=True, help="Directory containing video files")
-    parser.add_argument("--output", required=True, help="Directory to save processed videos")
+    parser.add_argument("--input", required=True, 
+                        help="Directory containing video files")
+    parser.add_argument("--output", required=True, 
+                        help="Directory to save processed videos")
     args = parser.parse_args()
 
     scan_videos(args.input, args.output)

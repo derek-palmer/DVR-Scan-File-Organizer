@@ -6,8 +6,6 @@ load-plugins=
 [MESSAGES CONTROL]
 disable=C0111,  # missing-docstring
         C0103,  # invalid-name
-        C0330,  # bad-continuation
-        C0326,  # bad-whitespace
         W0511,  # fixme
         R0903,  # too-few-public-methods
         R0913,  # too-many-arguments
