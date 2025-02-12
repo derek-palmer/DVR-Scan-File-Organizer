@@ -5,8 +5,9 @@ import argparse
 import subprocess
 from dvrscan_organizer.organizer import organize_output
 
+
 def scan_videos(input_dir, output_dir):
-    """ Scans all video files in a directory and organizes the output. """
+    """Scans all video files in a directory and organizes the output."""
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
@@ -21,16 +22,20 @@ def scan_videos(input_dir, output_dir):
 
     organize_output(output_dir)
 
+
 def main():
-    """ Main function for command-line execution. """
+    """Main function for command-line execution."""
     parser = argparse.ArgumentParser(description="Batch process videos with DVR-Scan")
-    parser.add_argument("--input", required=True, \
-                        help="Directory containing video files")
-    parser.add_argument("--output", required=True, \
-                        help="Directory to save processed videos")
+    parser.add_argument(
+        "--input", required=True, help="Directory containing video files"
+    )
+    parser.add_argument(
+        "--output", required=True, help="Directory to save processed videos"
+    )
     args = parser.parse_args()
 
     scan_videos(args.input, args.output)
+
 
 if __name__ == "__main__":
     main()

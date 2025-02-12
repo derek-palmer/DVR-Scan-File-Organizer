@@ -2,8 +2,9 @@
 
 from dvrscan_organizer.organizer import organize_output
 
+
 def test_organize_output(tmp_path):
-    """ Tests the organize_output function. """
+    """Tests the organize_output function."""
     output_dir = tmp_path / "output"
     output_dir.mkdir()
 
@@ -14,6 +15,7 @@ def test_organize_output(tmp_path):
 
     assert (output_dir / "motion" / "test_motion.avi").exists()
     assert (output_dir / "original" / "test.mp4").exists()
+
 
 if __name__ == "__main__":
     print("Test organizer module loaded successfully.")

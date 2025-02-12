@@ -3,8 +3,9 @@
 import os
 import shutil
 
+
 def organize_output(output_dir):
-    """ Organizes processed videos into structured folders. """
+    """Organizes processed videos into structured folders."""
     categories = ["motion", "original"]
 
     for category in categories:

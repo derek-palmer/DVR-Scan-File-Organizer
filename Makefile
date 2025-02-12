@@ -1,6 +1,6 @@
 # Makefile - Optimized for Live Mounting (No Rebuild Needed)
 
-.PHONY: help build run lint test clean scan
+.PHONY: help build run lint test clean scan format quality
 
 # Default help command
 help:
@@ -11,6 +11,8 @@ help:
 	@echo "  make test        - Run pytest tests inside the Docker container (no rebuild)"
 	@echo "  make scan        - Scan Docker image for vulnerabilities"
 	@echo "  make clean       - Remove old images and cache"
+	@echo "  make format      - Format Python files using Black"
+	@echo "  make quality     - Run format and lint"
 
 # Build the container (installs dependencies only)
 build:
@@ -27,6 +29,14 @@ lint:
 	docker run --rm -e PYTHONPATH=/app -v $(PWD)/dvrscan_organizer:/app/dvrscan_organizer \
 	-v $(PWD)/tests:/app/tests --entrypoint pylint dvrscan-organizer dvrscan_organizer tests
 
+# New formatting command
+format:
+	docker run --rm -v $(PWD)/dvrscan_organizer:/app/dvrscan_organizer \
+	-v $(PWD)/tests:/app/tests --entrypoint black dvrscan-organizer /app/dvrscan_organizer /app/tests
+
+# Combined quality check
+quality: format lint
+
 # Run tests inside a temporary container (no rebuild needed)
 test:
 	docker run --rm \
@@ -34,9 +44,6 @@ test:
 		-v $(PWD)/dvrscan_organizer:/app/dvrscan_organizer \
 		-v $(PWD)/tests:/app/tests \
 		--entrypoint pytest dvrscan-organizer tests
-
-
-
 
 # Cleanup old Docker images
 clean:
