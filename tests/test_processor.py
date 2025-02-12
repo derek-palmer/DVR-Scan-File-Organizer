@@ -7,11 +7,12 @@ import subprocess
 import pytest
 from dvrscan_organizer.processor import scan_videos
 
+
 @pytest.mark.skipif(
     not shutil.which("ffmpeg"), reason="FFmpeg is required for DVR-Scan"
 )
 def test_scan_videos(tmp_path):
-    """ Tests the scan_videos function with a valid video file. """
+    """Tests the scan_videos function with a valid video file."""
     input_dir = tmp_path / "input"
     output_dir = tmp_path / "output"
     input_dir.mkdir()
@@ -33,6 +34,7 @@ def test_scan_videos(tmp_path):
         pytest.fail(f"scan_videos raised an unexpected exception: {e}")
 
     assert len(os.listdir(output_dir)) > 0
+
 
 if __name__ == "__main__":
     print("Test processor module loaded successfully.")
