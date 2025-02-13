@@ -16,23 +16,25 @@ help:
 
 # Build the container (installs dependencies only)
 build:
-	docker build -t dvrscan-organizer .
+	docker build -t dvr-scan-file-organizer .
 
 # Run the container (mounts source code live)
 run:
-	docker run --rm -v $(PWD)/videos:/videos -v $(PWD)/output:/output \
-	-v $(PWD)/dvrscan_organizer:/app/dvrscan_organizer \
-	-v $(PWD)/tests:/app/tests dvrscan-organizer --input /videos --output /output
+	docker run --rm -e PYTHONPATH=/app \
+	-v $(PWD)/videos:/videos -v $(PWD)/output:/output \
+	-v $(PWD)/dvr_scan_file_organizer:/app/dvr_scan_file_organizer \
+	-v $(PWD)/tests:/app/tests \
+	dvr-scan-file-organizer --input /videos --output /output
 
 # Run linting inside a temporary container (no rebuild needed)
 lint:
-	docker run --rm -e PYTHONPATH=/app -v $(PWD)/dvrscan_organizer:/app/dvrscan_organizer \
-	-v $(PWD)/tests:/app/tests --entrypoint pylint dvrscan-organizer dvrscan_organizer tests
+	docker run --rm -e PYTHONPATH=/app -v $(PWD)/dvr_scan_file_organizer:/app/dvr_scan_file_organizer \
+	-v $(PWD)/tests:/app/tests --entrypoint pylint dvr-scan-file-organizer dvr_scan_file_organizer tests
 
 # New formatting command
 format:
-	docker run --rm -v $(PWD)/dvrscan_organizer:/app/dvrscan_organizer \
-	-v $(PWD)/tests:/app/tests --entrypoint black dvrscan-organizer /app/dvrscan_organizer /app/tests
+	docker run --rm -v $(PWD)/dvr_scan_file_organizer:/app/dvr_scan_file_organizer \
+	-v $(PWD)/tests:/app/tests --entrypoint black dvr-scan-file-organizer /app/dvr_scan_file_organizer /app/tests
 
 # Combined quality check
 quality: format lint
@@ -41,11 +43,11 @@ quality: format lint
 test:
 	docker run --rm \
 		-e PYTHONPATH=/app \
-		-v $(PWD)/dvrscan_organizer:/app/dvrscan_organizer \
+		-v $(PWD)/dvr_scan_file_organizer:/app/dvr_scan_file_organizer \
 		-v $(PWD)/tests:/app/tests \
-		--entrypoint pytest dvrscan-organizer tests
+		--entrypoint pytest dvr-scan-file-organizer /app/tests
 
 # Cleanup old Docker images
 clean:
-	docker rmi -f dvrscan-organizer || true
-	docker system prune -f
+	docker rmi -f dvr-scan-file-organizer || true
+	docker builder prune -f --filter "label=project=dvr-scan-file-organizer"

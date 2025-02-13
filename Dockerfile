@@ -17,4 +17,6 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set entry point to run the processor module
-ENTRYPOINT ["python", "-m", "dvrscan_organizer.processor"]
+ENTRYPOINT ["python", "-m", "dvr_scan_file_organizer.processor"]
+
+LABEL project="dvr-scan-file-organizer"

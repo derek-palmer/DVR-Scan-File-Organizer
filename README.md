@@ -1,5 +1,5 @@
-# DVR-Scan-Organizer
-DVR-Scan-Organizer is a Dockerized extension for DVR-Scan, designed to process multiple video files and organize output in a structured format.
+# DVR-Scan-File-Organizer
+DVR-Scan-File-Organizer is a Dockerized extension for DVR-Scan, designed to process multiple video files and organize output in a structured format.
 
 ## Getting Started
 ### Prerequisites
@@ -8,8 +8,8 @@ DVR-Scan-Organizer is a Dockerized extension for DVR-Scan, designed to process m
 ### Setup and Build
 Clone the repository:
 ```sh
-git clone https://github.com/derek-palmer/DVR-Scan-Organizer.git
-cd DVR-Scan-Organizer
+git clone https://github.com/derek-palmer/DVR-Scan-File-Organizer.git
+cd DDVR-Scan-File-Organizer
 ```
 
 Build the Docker container:
@@ -17,7 +17,7 @@ Build the Docker container:
 make build
 ```
 
-### Running DVR-Scan-Organizer
+### Running DVR-Scan-File-Organizer
 Ensure input videos are inside `videos/` and run:
 ```sh
 make run
@@ -41,15 +41,15 @@ Tests run against the latest live-mounted code.
 
 ## Project Structure
 ```
-DVR-Scan-Organizer/
-│── dvrscan_organizer/      # Core processing logic
-│── tests/                  # Unit tests
-│── videos/                 # Input video files (mounted at runtime)
-│── output/                 # Processed output files (mounted at runtime)
-│── Dockerfile              # Container configuration
-│── Makefile                # Automation for build/test/lint/run
-│── requirements.txt        # Python dependencies
-│── README.md               # Documentation
+DVR-Scan-File-Organizer/
+│── DVR-Scan-File-Organizer/      # Core processing logic
+│── tests/                        # Unit tests
+│── videos/                       # Input video files (mounted at runtime)
+│── output/                       # Processed output files (mounted at runtime)
+│── Dockerfile                    # Container configuration
+│── Makefile                      # Automation for build/test/lint/run
+│── requirements.txt              # Python dependencies
+│── README.md                     # Documentation
 ```
 
 ## Summary

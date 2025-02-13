@@ -1,6 +1,6 @@
 """ Unit tests for organizer module. """
 
-from dvrscan_organizer.organizer import organize_output
+from dvr_scan_file_organizer.organizer import organize_output
 
 
 def test_organize_output(tmp_path):

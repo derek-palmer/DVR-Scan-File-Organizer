@@ -19,24 +19,20 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t dvrscan-organizer .
+          docker build -t dvr-scan-file-organizer .
 
       - name: Code Quality Checks
         run: |
-          # Check formatting first
-          docker run --rm -v ${{ github.workspace }}/dvrscan_organizer:/app/dvrscan_organizer \
-            -v ${{ github.workspace }}/tests:/app/tests \
-            --entrypoint black dvrscan-organizer --check /app/dvrscan_organizer /app/tests
+          docker run --rm -v ${{ github.workspace }}/dvr_scan_file_organizer:/app/dvr_scan_file_organizer \
+            --entrypoint black dvr-scan-file-organizer --check /app/dvr_scan_file_organizer
           
-          # Then run linting
           docker run --rm -e PYTHONPATH=/app \
-            -v ${{ github.workspace }}/dvrscan_organizer:/app/dvrscan_organizer \
-            -v ${{ github.workspace }}/tests:/app/tests \
-            --entrypoint pylint dvrscan-organizer dvrscan_organizer tests
+            -v ${{ github.workspace }}/dvr_scan_file_organizer:/app/dvr_scan_file_organizer \
+            --entrypoint pylint dvr-scan-file-organizer dvr_scan_file_organizer
 
       - name: Run Tests
         run: |
           docker run --rm -e PYTHONPATH=/app \
-            -v ${{ github.workspace }}/dvrscan_organizer:/app/dvrscan_organizer \
+            -v ${{ github.workspace }}/dvr_scan_file_organizer:/app/dvr_scan_file_organizer \
             -v ${{ github.workspace }}/tests:/app/tests \
-            --entrypoint pytest dvrscan-organizer tests
+            --entrypoint pytest dvr-scan-file-organizer tests

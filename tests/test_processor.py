@@ -5,7 +5,7 @@ import shutil
 from pathlib import Path
 import subprocess
 import pytest
-from dvrscan_organizer.processor import scan_videos
+from dvr_scan_file_organizer.processor import scan_videos
 
 
 @pytest.mark.skipif(
