@@ -27,12 +27,12 @@ jobs:
             --entrypoint black dvr-scan-file-organizer --check /app/dvr_scan_file_organizer
           
           docker run --rm -e PYTHONPATH=/app \
-            -v ${{ github.workspace }}/DVR_Scan_File_Organizer:/app/DVR_Scan_File_Organizer \
-            --entrypoint pylint dvr-scan-file-organizer DVR_Scan_File_Organizer
+            -v ${{ github.workspace }}/dvr_scan_file_organizer:/app/dvr_scan_file_organizer \
+            --entrypoint pylint dvr-scan-file-organizer dvr_scan_file_organizer
 
       - name: Run Tests
         run: |
           docker run --rm -e PYTHONPATH=/app \
-            -v ${{ github.workspace }}/DVR_Scan_File_Organizer:/app/DVR_Scan_File_Organizer \
+            -v ${{ github.workspace }}/dvr_scan_file_organizer:/app/dvr_scan_file_organizer \
             -v ${{ github.workspace }}/tests:/app/tests \
             --entrypoint pytest dvr-scan-file-organizer tests
