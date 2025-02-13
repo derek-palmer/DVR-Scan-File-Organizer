@@ -3,7 +3,7 @@
 import os
 import argparse
 import subprocess
-from dvrscan_organizer.organizer import organize_output
+from dvr_scan_file_organizer.organizer import organize_output
 
 
 def scan_videos(input_dir, output_dir):
