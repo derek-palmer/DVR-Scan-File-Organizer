@@ -35,4 +35,4 @@ jobs:
           docker run --rm -e PYTHONPATH=/app \
             -v ${{ github.workspace }}/DVR_Scan_File_Organizer:/app/DVR_Scan_File_Organizer \
             -v ${{ github.workspace }}/tests:/app/tests \
-            --entrypoint pytest DVR-Scan-File-Organizer tests
+            --entrypoint pytest dvr-scan-file-organizer tests
