@@ -1,6 +1,6 @@
-black==24.3.0
-cuda-core[cu12]
-dvr-scan[opencv-headless]
-opencv-python
-pylint==3.0.3
-pytest
+black==24.8.0
+cuda-core[cu12]==0.4.0
+dvr-scan==1.8.1
+opencv-python==4.12.0.88
+pylint==3.2.6
+pytest==8.3.3
