@@ -98,7 +98,7 @@ make quality   # format + lint
 Local venv (optional):
 
 ```sh
-python3.13 -m venv .venv
+python3.14 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements-dev.txt
 pytest tests/
