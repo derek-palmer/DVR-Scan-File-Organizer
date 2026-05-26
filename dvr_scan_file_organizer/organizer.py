@@ -15,6 +15,8 @@ def organize_output(output_dir):
 
     for file in os.listdir(output_dir):
         file_path = os.path.join(output_dir, file)
+        if not os.path.isfile(file_path):
+            continue
         if file.endswith("_motion.avi"):
             shutil.move(file_path, os.path.join(output_dir, "motion", file))
         elif file.endswith((".mp4", ".avi", ".mkv")):
