@@ -1,4 +1,4 @@
-""" Processor module for scanning videos using DVR-Scan. """
+"""Processor module for scanning videos using DVR-Scan."""
 
 import os
 import argparse

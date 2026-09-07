@@ -1,4 +1,4 @@
-""" Unit tests for organizer module. """
+"""Unit tests for organizer module."""
 
 from dvr_scan_file_organizer.organizer import organize_output
 
