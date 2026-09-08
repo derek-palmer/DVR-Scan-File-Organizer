@@ -1,4 +1,4 @@
-""" Unit tests for processor module. """
+"""Unit tests for processor module."""
 
 import os
 import shutil

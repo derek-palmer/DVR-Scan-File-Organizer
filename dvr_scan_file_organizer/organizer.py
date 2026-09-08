@@ -1,4 +1,4 @@
-""" Organizer module for structuring output files. """
+"""Organizer module for structuring output files."""
 
 import os
 import shutil
