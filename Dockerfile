@@ -5,9 +5,8 @@ FROM python:3.13-slim
 # Set working directory
 WORKDIR /app
 
-# Install required system packages (OpenGL, FFmpeg, dependencies)
+# Install required system packages (FFmpeg, dependencies)
 RUN apt-get update && apt-get install -y \
-    libgl1-mesa-glx \
     libglib2.0-0 \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
