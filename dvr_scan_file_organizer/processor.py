@@ -31,13 +31,26 @@ def _build_dvr_scan_cmd(input_file, output_file, config_path=None):
     return cmd
 
 
+def _same_existing_path(path_a, path_b):
+    """True when both paths exist and resolve to the same file.
+
+    os.path.samefile raises FileNotFoundError if either path is missing,
+    so callers that run before a first copy must check existence first.
+    """
+    return (
+        os.path.exists(path_a)
+        and os.path.exists(path_b)
+        and os.path.samefile(path_a, path_b)
+    )
+
+
 def scan_videos(input_dir, output_dir, config_path=None):
     """Scans all video files in a directory and organizes the output."""
     if not os.path.isdir(input_dir):
         raise FileNotFoundError(f"Input directory does not exist: {input_dir}")
 
     # Check if input and output resolve to the same location
-    if os.path.exists(output_dir) and os.path.samefile(input_dir, output_dir):
+    if _same_existing_path(input_dir, output_dir):
         raise ValueError("Input and output directories cannot be the same location")
 
     videos = _find_videos(input_dir)
@@ -57,10 +70,10 @@ def scan_videos(input_dir, output_dir, config_path=None):
         cmd = _build_dvr_scan_cmd(input_file, output_file, config_path)
         subprocess.run(cmd, check=True)
 
-        # Copy original into output root so organizer can route to original/
-        # Skip if input and output directories are the same
+        # Copy original into output root so organizer can route to original/.
+        # First copy has no dest yet — only skip when dest already is the same file.
         output_copy_path = os.path.join(output_dir, file)
-        if not os.path.samefile(input_file, output_copy_path):
+        if not _same_existing_path(input_file, output_copy_path):
             shutil.copy2(input_file, output_copy_path)
 
     organize_output(output_dir)
