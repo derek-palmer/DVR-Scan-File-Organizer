@@ -52,7 +52,7 @@ make run
 
 Output layout:
 
-```
+```text
 output/
   motion/
     clip.mp4_motion.avi
@@ -119,7 +119,7 @@ Latest scan artifact: [`docs/forerunner-scan.yaml`](docs/forerunner-scan.yaml).
 
 ## Project structure
 
-```
+```text
 DVR-Scan-File-Organizer/
 ├── dvr_scan_file_organizer/
 │   ├── processor.py          # Batch scan CLI

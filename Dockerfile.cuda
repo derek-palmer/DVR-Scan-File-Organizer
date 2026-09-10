@@ -6,11 +6,11 @@ FROM ${CUDA_IMAGE} AS builder
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
     build-essential \
     && add-apt-repository -y ppa:deadsnakes/ppa \
-    && apt-get update && apt-get install -y \
+    && apt-get update && apt-get install -y --no-install-recommends \
     python3.14 \
     python3.14-venv \
     python3.14-dev \
@@ -24,10 +24,10 @@ FROM ${CUDA_IMAGE}
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
     && add-apt-repository -y ppa:deadsnakes/ppa \
-    && apt-get update && apt-get install -y \
+    && apt-get update && apt-get install -y --no-install-recommends \
     python3.14 \
     python3.14-venv \
     libgl1 \

@@ -5,7 +5,7 @@ FROM python:3.14-slim AS builder
 WORKDIR /app
 
 # Compiler toolchain for native wheels in the builder stage only.
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
@@ -19,7 +19,7 @@ WORKDIR /app
 # Runtime libs for dvr-scan[opencv-headless] + ffmpeg. No libgl1-mesa-glx:
 # that package is gone on Debian trixie, and GL was only required for the
 # removed non-headless opencv-python pin (#16).
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libglib2.0-0 \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
