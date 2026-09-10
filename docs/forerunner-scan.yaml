@@ -1,0 +1,74 @@
+# forerunner-scan-result
+repo_type: cli
+primary_stack:
+  language: python
+  runtime: "3.14"
+  framework: dvr-scan
+secondary_stacks:
+  - type: container
+    tool: docker
+entry_points:
+  - dvr_scan_file_organizer/processor.py
+key_modules:
+  - path: dvr_scan_file_organizer/processor.py
+    responsibility: Batch DVR-Scan CLI; invokes dvr-scan per video; copies originals
+  - path: dvr_scan_file_organizer/organizer.py
+    responsibility: Moves motion clips and originals into motion/ and original/ subdirs
+external_integrations:
+  - type: cli
+    technology: dvr-scan
+    evidence: "processor.py subprocess runs dvr-scan -i/-o with optional -c"
+  - type: video
+    technology: ffmpeg
+    evidence: "Dockerfile installs ffmpeg; tests/conftest.py generates fixtures"
+config_surface:
+  env_vars:
+    - DVR_SCAN_CONFIG
+  config_files:
+    - dvr-scan.cfg
+    - forerunner.config.yaml
+test_coverage:
+  present: true
+  framework: pytest
+  location: tests/
+ci_cd:
+  present: true
+  platform: github-actions
+  workflows:
+    - .github/workflows/ci.yml
+docs_presence:
+  readme: true
+  docs_folder: true
+  inline_comments: moderate
+pinned_versions_found:
+  - component: python
+    version: "3.14"
+    type: runtime
+    unpinned: false
+    locations:
+      - Dockerfile
+  - component: nvidia-cuda
+    version: "13.2.1-cudnn-runtime-ubuntu24.04"
+    type: base-image
+    unpinned: false
+    locations:
+      - Dockerfile.cuda
+  - component: black
+    version: "24.3.0"
+    type: dependency
+    unpinned: false
+    locations:
+      - requirements.txt
+  - component: pylint
+    version: "3.0.3"
+    type: dependency
+    unpinned: false
+    locations:
+      - requirements.txt
+  - component: dvr-scan
+    version: null
+    type: dependency
+    unpinned: true
+    locations:
+      - requirements.txt
+gaps: []

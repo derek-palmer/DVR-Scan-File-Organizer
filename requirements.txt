@@ -1,5 +1,5 @@
 black==26.3.1
-cuda-core[cu12]
+cuda-core[cu13]
 dvr-scan[opencv-headless]
 pylint==3.0.3
 pytest

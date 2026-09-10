@@ -1,21 +1,31 @@
 # Dockerfile - Optimized for Live Mounting
 
-FROM python:3.13-slim
+FROM python:3.14-slim AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Install required system packages (FFmpeg, dependencies)
-RUN apt-get update && apt-get install -y \
+# Compiler toolchain for native wheels in the builder stage only.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
+
+FROM python:3.14-slim
+
+WORKDIR /app
+
+# Runtime libs for dvr-scan[opencv-headless] + ffmpeg. No libgl1-mesa-glx:
+# that package is gone on Debian trixie, and GL was only required for the
+# removed non-headless opencv-python pin (#16).
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libglib2.0-0 \
     ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy and install dependencies only
-COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --from=builder /usr/local /usr/local
 
-# Set entry point to run the processor module
 ENTRYPOINT ["python", "-m", "dvr_scan_file_organizer.processor"]
 
 LABEL project="dvr-scan-file-organizer"
